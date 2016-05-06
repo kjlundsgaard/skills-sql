@@ -1,79 +1,266 @@
-CREATE TABLE models (
-    id SERIAL PRIMARY KEY,
-    year INTEGER NOT NULL,
-    brand_name VARCHAR(50) NULL,
-    name VARCHAR(50) NOT NULL
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.5.1
+-- Dumped by pg_dump version 9.5.1
+
+SET statement_timeout = 0;
+SET lock_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+SET row_security = off;
+
+--
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
+--
+
+CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
+
+
+--
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
+--
+
+COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
+
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- Name: awards; Type: TABLE; Schema: public; Owner: KatieLundsgaard
+--
+
+CREATE TABLE awards (
+    name character varying(50),
+    year integer,
+    winner_id integer NOT NULL
 );
+
+
+ALTER TABLE awards OWNER TO "KatieLundsgaard";
+
+--
+-- Name: brands; Type: TABLE; Schema: public; Owner: KatieLundsgaard
+--
 
 CREATE TABLE brands (
-    id SERIAL PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    founded INTEGER,
-    headquarters VARCHAR(50),
-    discontinued INTEGER
+    id integer NOT NULL,
+    name character varying(50) NOT NULL,
+    founded integer,
+    headquarters character varying(50),
+    discontinued integer
 );
 
-INSERT INTO brands (name, founded, headquarters, discontinued)
-VALUES ('Ford', 1903, 'Dearborn, MI', NULL),
-('Chrysler', 1925, 'Auburn Hills, Michigan', NULL),
-('Hillman', 1907, 'Ryton-on-Dunsmore, England', 1981),
-('Chevrolet', 1911, 'Detroit, Michigan', NULL),
-('Cadillac', 1902, 'New York City, NY', NULL),
-('BMW', 1916, 'Munich, Bavaria, Germany', NULL),
-('Austin', 1905, 'Longbridge, England', 1987),
-('Fairthorpe', 1954, 'Chalfont St Peter, Buckinghamshire', 1976),
-('Studebaker', 1852, 'South Bend, Indiana', 1967),
-('Pontiac', 1926, 'Detroit, MI', 2010),
-('Buick', 1903, 'Detroit, MI', NULL),
-('Rambler', 1901, 'Kenosha, Washington', 1969),
-('Plymouth', 1928, 'Auburn Hills, Michigan', 2001),
-('Tesla', 2003, 'Palo Alto, CA', NULL);
 
-INSERT INTO models (year, brand_name, name) VALUES
-(1909, 'Ford', 'Model T'),
-(1926, 'Chrysler', 'Imperial'),
-(1950, 'Hillman', 'Minx Magnificent'),
-(1953, 'Chevrolet', 'Corvette'),
-(1954, 'Chevrolet', 'Corvette'),
-(1954, 'Cadillac', 'Fleetwood'),
-(1955, 'Chevrolet', 'Corvette'),
-(1955, 'Ford', 'Thunderbird'),
-(1956, 'Chevrolet', 'Corvette'),
-(1957, 'Chevrolet', 'Corvette'),
-(1957, 'BMW', '600'),
-(1958, 'Chevrolet', 'Corvette'),
-(1958, 'BMW', '600'),
-(1958, 'Ford', 'Thunderbird'),
-(1959, 'Austin', 'Mini'),
-(1959, 'Chevrolet', 'Corvette'),
-(1959, 'BMW', '600'),
-(1960, 'Chevrolet', 'Corvair'),
-(1960, 'Chevrolet', 'Corvette'),
-(1960, 'Fillmore', 'Fillmore'),
-(1960, 'Fairthorpe', 'Rockette'),
-(1961, 'Austin', 'Mini Cooper'),
-(1961, 'Studebaker', 'Avanti'),
-(1961, 'Pontiac', 'Tempest'),
-(1961, 'Chevrolet', 'Corvette'),
-(1962, 'Pontiac', 'Grand Prix'),
-(1962, 'Chevrolet', 'Corvette'),
-(1962, 'Studebaker', 'Avanti'),
-(1962, 'Buick', 'Special'),
-(1963, 'Austin', 'Mini'),
-(1963, 'Austin', 'Mini Cooper S'),
-(1963, 'Rambler', 'Classic'),
-(1963, 'Ford', 'E-Series'),
-(1963, 'Studebaker', 'Avanti'),
-(1963, 'Pontiac', 'Grand Prix'),
-(1963, 'Chevrolet', 'Corvair 500'),
-(1963, 'Chevrolet', 'Corvette'),
-(1964, 'Chevrolet', 'Corvette'),
-(1964, 'Ford', 'Mustang'),
-(1964, 'Ford', 'Galaxie'),
-(1964, 'Pontiac', 'GTO'),
-(1964, 'Pontiac', 'LeMans'),
-(1964, 'Pontiac', 'Bonneville'),
-(1964, 'Pontiac', 'Grand Prix'),
-(1964, 'Plymouth', 'Fury'),
-(1964, 'Studebaker', 'Avanti'),
-(1964, 'Austin', 'Mini Cooper');
+ALTER TABLE brands OWNER TO "KatieLundsgaard";
+
+--
+-- Name: brands_id_seq; Type: SEQUENCE; Schema: public; Owner: KatieLundsgaard
+--
+
+CREATE SEQUENCE brands_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE brands_id_seq OWNER TO "KatieLundsgaard";
+
+--
+-- Name: brands_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: KatieLundsgaard
+--
+
+ALTER SEQUENCE brands_id_seq OWNED BY brands.id;
+
+
+--
+-- Name: models; Type: TABLE; Schema: public; Owner: KatieLundsgaard
+--
+
+CREATE TABLE models (
+    id integer NOT NULL,
+    year integer NOT NULL,
+    brand_name character varying(50),
+    name character varying(50) NOT NULL
+);
+
+
+ALTER TABLE models OWNER TO "KatieLundsgaard";
+
+--
+-- Name: models_id_seq; Type: SEQUENCE; Schema: public; Owner: KatieLundsgaard
+--
+
+CREATE SEQUENCE models_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE models_id_seq OWNER TO "KatieLundsgaard";
+
+--
+-- Name: models_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: KatieLundsgaard
+--
+
+ALTER SEQUENCE models_id_seq OWNED BY models.id;
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: KatieLundsgaard
+--
+
+ALTER TABLE ONLY brands ALTER COLUMN id SET DEFAULT nextval('brands_id_seq'::regclass);
+
+
+--
+-- Name: id; Type: DEFAULT; Schema: public; Owner: KatieLundsgaard
+--
+
+ALTER TABLE ONLY models ALTER COLUMN id SET DEFAULT nextval('models_id_seq'::regclass);
+
+
+--
+-- Data for Name: awards; Type: TABLE DATA; Schema: public; Owner: KatieLundsgaard
+--
+
+COPY awards (name, year, winner_id) FROM stdin;
+IIHS Safety Award	2015	49
+IIHS Safety Award	2015	50
+\.
+
+
+--
+-- Data for Name: brands; Type: TABLE DATA; Schema: public; Owner: KatieLundsgaard
+--
+
+COPY brands (id, name, founded, headquarters, discontinued) FROM stdin;
+1	Ford	1903	Dearborn, MI	\N
+2	Chrysler	1925	Auburn Hills, Michigan	\N
+3	Hillman	1907	Ryton-on-Dunsmore, England	1981
+4	Chevrolet	1911	Detroit, Michigan	\N
+5	Cadillac	1902	New York City, NY	\N
+6	BMW	1916	Munich, Bavaria, Germany	\N
+7	Austin	1905	Longbridge, England	1987
+8	Fairthorpe	1954	Chalfont St Peter, Buckinghamshire	1976
+9	Studebaker	1852	South Bend, Indiana	1967
+10	Pontiac	1926	Detroit, MI	2010
+11	Buick	1903	Detroit, MI	\N
+12	Rambler	1901	Kenosha, Washington	1969
+13	Plymouth	1928	Auburn Hills, Michigan	2001
+14	Tesla	2003	Palo Alto, CA	\N
+\.
+
+
+--
+-- Name: brands_id_seq; Type: SEQUENCE SET; Schema: public; Owner: KatieLundsgaard
+--
+
+SELECT pg_catalog.setval('brands_id_seq', 14, true);
+
+
+--
+-- Data for Name: models; Type: TABLE DATA; Schema: public; Owner: KatieLundsgaard
+--
+
+COPY models (id, year, brand_name, name) FROM stdin;
+1	1909	Ford	Model T
+2	1926	Chrysler	Imperial
+3	1950	Hillman	Minx Magnificent
+4	1953	Chevrolet	Corvette
+5	1954	Chevrolet	Corvette
+6	1954	Cadillac	Fleetwood
+7	1955	Chevrolet	Corvette
+8	1955	Ford	Thunderbird
+9	1956	Chevrolet	Corvette
+10	1957	Chevrolet	Corvette
+11	1957	BMW	600
+12	1958	Chevrolet	Corvette
+13	1958	BMW	600
+14	1958	Ford	Thunderbird
+15	1959	Austin	Mini
+16	1959	Chevrolet	Corvette
+17	1959	BMW	600
+18	1960	Chevrolet	Corvair
+19	1960	Chevrolet	Corvette
+20	1960	Fillmore	Fillmore
+21	1960	Fairthorpe	Rockette
+22	1961	Austin	Mini Cooper
+23	1961	Studebaker	Avanti
+24	1961	Pontiac	Tempest
+25	1961	Chevrolet	Corvette
+26	1962	Pontiac	Grand Prix
+27	1962	Chevrolet	Corvette
+28	1962	Studebaker	Avanti
+29	1962	Buick	Special
+30	1963	Austin	Mini
+31	1963	Austin	Mini Cooper S
+32	1963	Rambler	Classic
+33	1963	Ford	E-Series
+34	1963	Studebaker	Avanti
+35	1963	Pontiac	Grand Prix
+36	1963	Chevrolet	Corvair 500
+37	1963	Chevrolet	Corvette
+38	1964	Chevrolet	Corvette
+39	1964	Ford	Mustang
+40	1964	Ford	Galaxie
+41	1964	Pontiac	GTO
+42	1964	Pontiac	LeMans
+43	1964	Pontiac	Bonneville
+44	1964	Pontiac	Grand Prix
+45	1964	Plymouth	Fury
+46	1964	Studebaker	Avanti
+47	1964	Austin	Mini Cooper
+48	2015	Chevrolet	Malibu
+49	2015	Subaru	Outback
+\.
+
+
+--
+-- Name: models_id_seq; Type: SEQUENCE SET; Schema: public; Owner: KatieLundsgaard
+--
+
+SELECT pg_catalog.setval('models_id_seq', 49, true);
+
+
+--
+-- Name: brands_pkey; Type: CONSTRAINT; Schema: public; Owner: KatieLundsgaard
+--
+
+ALTER TABLE ONLY brands
+    ADD CONSTRAINT brands_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: models_pkey; Type: CONSTRAINT; Schema: public; Owner: KatieLundsgaard
+--
+
+ALTER TABLE ONLY models
+    ADD CONSTRAINT models_pkey PRIMARY KEY (id);
+
+
+--
+-- Name: public; Type: ACL; Schema: -; Owner: postgres
+--
+
+REVOKE ALL ON SCHEMA public FROM PUBLIC;
+REVOKE ALL ON SCHEMA public FROM postgres;
+GRANT ALL ON SCHEMA public TO postgres;
+GRANT ALL ON SCHEMA public TO PUBLIC;
+
+
+--
+-- PostgreSQL database dump complete
+--
+
